@@ -37,6 +37,11 @@
                 return false;
             }
 
+            if (password.length < 8){
+                alert("Password is not secure enough");
+                return false;
+            }
+
             return true;
         }
     });
@@ -46,9 +51,9 @@
 #{form @processRegister(), id:'form', name:'reg-form'}
 <h2 class="text-left">&{'Public.register.title'}</h2>
 
-#{ifErrors}
-<div id="register_error" class="error">${errors[0]}</div>
-#{/ifErrors}
+#{if flash.error}
+<div id="register_error" class="error">${flash.error}</div>
+#{/if}
 
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
