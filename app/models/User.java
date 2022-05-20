@@ -22,7 +22,7 @@ public class User {
         this.username = json.has(Constants.User.FIELD_USERNAME) ? json.get(Constants.User.FIELD_USERNAME).getAsString() : "";
         this.password = json.has(Constants.User.FIELD_PASSWORD) ? json.get(Constants.User.FIELD_PASSWORD).getAsString() : "";
         this.mark = json.has(Constants.User.FIELD_MARK) ? json.get(Constants.User.FIELD_MARK).getAsInt() : 0;
-        this.type = json.has(Constants.User.FIELD_TYPE) ? json.get(Constants.User.FIELD_TYPE).getAsString() : "teacher";
+        this.type = json.has(Constants.User.FIELD_TYPE) ? json.get(Constants.User.FIELD_TYPE).getAsString() : "student";
     }
 
     public User(String username, String password, String type, Integer mark) {
@@ -91,10 +91,13 @@ public class User {
     }
 
     public static User loadUser(String username){
+      if (!username.equals(""))
+      {
         File f = new File(Constants.User.USERS_FOLDER + "/" + username);
         if (f.exists()){
             return new User(FileUtils.getJsonFromFile(f));
         }
+      }
         return null;
     }
 
